@@ -1,4 +1,28 @@
+* {
+    /* border-box permet d'inclure le padding et les bordures dans le calcul des dimensions d'un élément */
+    -moz-box-sizing: border-box;
+    -webkit-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: Arial, Helvetica, sans-serif;
+    margin: 0;
+    padding: 0;
+}
+
+#map-container {
+    display: flex;
+}
+
 #map {
     height: 400px;
-    width: 100%;
+    width: 80%;
+}
+
+#station {
+    display: none;
+    width: 20%;
+    padding: 0 10px;
+    border: 1px solid #000000;
 }

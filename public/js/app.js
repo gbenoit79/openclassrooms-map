@@ -27,11 +27,25 @@ function initMap() {
                 });
                 marker.addListener('click', function() {
                     $('#station').hide();
+
                     var htmlString = 'Adresse: '+station.address+'<br /><br />';
                     htmlString += station.bike_stands+' places<br />';
                     htmlString += station.available_bikes+' vélos disponibles<br />';
-                    console.log(htmlString);
                     $('#station-info').html(htmlString);
+
+                    $('#book-button').click(function() {
+                        // Add booking
+                        var booking = {
+                            station: {
+                                number: station.number,
+                                name: station.name,
+                                address: station.address
+                            },
+                            bookedAt: Date.now()
+                        }
+                        sessionStorage.setItem('booking', JSON.stringify(booking));
+                    });
+
                     $('#station').show();
                 });
             });
@@ -40,3 +54,33 @@ function initMap() {
             console.log( "Request failed: " + textStatus );
         });
 }
+
+function updateBookingInfo() {
+    var bookingJson = sessionStorage.getItem('booking');
+    if (bookingJson == null) {
+        return false;
+    }
+
+    var booking = JSON.parse(bookingJson);
+
+    // Get remaining time
+    // 20 min session
+    var remainingSeconds = (20 * 60) - ((Date.now() - booking.bookedAt) / 1000);
+    // Remaining time is over?
+    if (remainingSeconds <= 0) {
+        sessionStorage.removeItem('booking');
+        $('#booking-info').html('');
+        return false;
+    }
+    var minutes = Math.floor(remainingSeconds / 60);
+    var seconds = Math.floor(remainingSeconds % 60);
+
+    var htmlString = '1 vélo réservé à la station "'+booking.station.name+'" pour '+minutes+' min '+seconds+' s';
+    $('#booking-info').html(htmlString);
+}
+
+// Execute when the DOM is fully loaded
+$(function() {
+    // Update booking info each second
+    setInterval(updateBookingInfo, 1000);
+});

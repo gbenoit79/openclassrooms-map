@@ -14,11 +14,20 @@
                 <h2>Détails de la station</h2>
                 <p id="station-info"></p>
                 <button id="book-button">Réserver</button>
+                <div id="signature">
+                    <h3>Signature</h3>
+                    <canvas id="signature-canvas">
+                        <p>Désolé, votre navigateur ne supporte pas Canvas. Mettez-vous à jour</p>
+                    </canvas><br />
+                    <button id="signature-clear-button">Effacer</button>
+                    <button id="signature-validate-button">Valider</button>
+                </div>
             </div>
         </div>
         <div id="booking-info"></div>
 
         <script src="public/js/jquery/jquery-3.3.1.min.js"></script>
+        <script src="public/js/signature.js"></script>
         <script src="public/js/app.js"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBmO2Nsu8WL2QXpj0l5mxxJHrDw5Q6vNg&callback=initMap"></script>
     </body>

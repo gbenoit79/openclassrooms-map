@@ -30,3 +30,11 @@ body {
 #booking-info {
     padding: 10px;
 }
+
+#signature {
+    display: none;
+}
+
+#signature-canvas {
+    border: 1px solid #000000;
+}

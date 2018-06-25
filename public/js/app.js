@@ -1,3 +1,5 @@
+var signature;
+
 function initMap() {
     // Get map
     var lyonPosition = {lat: 45.75, lng: 4.85};
@@ -34,16 +36,21 @@ function initMap() {
                     $('#station-info').html(htmlString);
 
                     $('#book-button').click(function() {
-                        // Add booking
-                        var booking = {
-                            station: {
-                                number: station.number,
-                                name: station.name,
-                                address: station.address
-                            },
-                            bookedAt: Date.now()
-                        }
-                        sessionStorage.setItem('booking', JSON.stringify(booking));
+                        $('#book-button').hide();
+                        $('#signature').show();
+
+                        $('#signature-validate-button').click(function() {
+                            // Add booking
+                            var booking = {
+                                station: {
+                                    number: station.number,
+                                    name: station.name,
+                                    address: station.address
+                                },
+                                bookedAt: Date.now()
+                            }
+                            sessionStorage.setItem('booking', JSON.stringify(booking));
+                        });
                     });
 
                     $('#station').show();
@@ -83,4 +90,11 @@ function updateBookingInfo() {
 $(function() {
     // Update booking info each second
     setInterval(updateBookingInfo, 1000);
+
+    // Signature
+    signature = Object.create(Signature);
+    signature.init('signature-canvas', 200, 100);
+    $('#signature-clear-button').click(function() {
+        signature.clear()
+    });
 });

@@ -29,29 +29,35 @@ function initMap() {
                 });
                 marker.addListener('click', function() {
                     $('#station').hide();
+                    $('#book-button').hide();
+                    $('#signature').hide();
 
                     var htmlString = 'Adresse: '+station.address+'<br /><br />';
                     htmlString += station.bike_stands+' places<br />';
                     htmlString += station.available_bikes+' vélos disponibles<br />';
                     $('#station-info').html(htmlString);
 
-                    $('#book-button').click(function() {
-                        $('#book-button').hide();
-                        $('#signature').show();
-
-                        $('#signature-validate-button').click(function() {
-                            // Add booking
-                            var booking = {
-                                station: {
-                                    number: station.number,
-                                    name: station.name,
-                                    address: station.address
-                                },
-                                bookedAt: Date.now()
-                            }
-                            sessionStorage.setItem('booking', JSON.stringify(booking));
+                    // Is a bike available?
+                    console.log(station.available_bikes);
+                    if (station.available_bikes > 0) {
+                        $('#book-button').show();
+                        $('#book-button').click(function() {
+                            $('#book-button').hide();
+                            $('#signature').show();
+                            $('#signature-validate-button').click(function() {
+                                // Add booking
+                                var booking = {
+                                    station: {
+                                        number: station.number,
+                                        name: station.name,
+                                        address: station.address
+                                    },
+                                    bookedAt: Date.now()
+                                }
+                                sessionStorage.setItem('booking', JSON.stringify(booking));
+                            });
                         });
-                    });
+                    }
 
                     $('#station').show();
                 });

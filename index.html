@@ -8,6 +8,50 @@
     </head>
 
     <body>
+        <div id="slider">
+            <ul id="slides">
+                <li class="slide slide-showing">
+                    <img alt="Vélos" class="slide-img" src="public/images/summer-sport-bikes-bicycles.jpg" />
+                    <h2>Etape 1/5</h2>
+                    <p>
+                        Lorem ipsum dolor sit amet, consectetur adipiscing elit. Maecenas consequat augue vitae iaculis tristique. Ut augue neque, convallis ac tempor eget, malesuada vel augue. Morbi hendrerit, turpis vel fringilla commodo, tortor tellus aliquet mauris, vel tincidunt orci magna at lectus.
+                    </p>
+                </li>
+                <li class="slide">
+                    <img alt="Vélos" class="slide-img" src="public/images/summer-sport-bikes-bicycles.jpg" />
+                    <h2>Etape 2/5</h2>
+                    <p>
+                        Nulla diam arcu, scelerisque id ipsum vel, gravida bibendum nulla. Morbi viverra, turpis sed semper vehicula, ex quam fringilla ex, ac ullamcorper nisl orci sed odio. Sed pellentesque consectetur urna quis vehicula. Sed eu metus et tellus egestas vulputate. Aenean nec fringilla lectus.
+                    </p>
+                </li>
+                <li class="slide">
+                    <img alt="Vélos" class="slide-img" src="public/images/summer-sport-bikes-bicycles.jpg" />
+                    <h2>Etape 3/5</h2>
+                    <p>
+                        Proin vitae nisi dapibus, dignissim lacus id, aliquet leo. Aliquam ultrices, erat et hendrerit sollicitudin, neque ipsum tempus justo, et accumsan tellus dolor et diam. Nullam ac enim vitae dui convallis posuere id eu libero. Aliquam posuere, libero vitae sodales rutrum, tellus quam scelerisque leo, vitae cursus nisl elit cursus mi.
+                    </p>
+                </li>
+                <li class="slide">
+                    <img alt="Vélos" class="slide-img" src="public/images/summer-sport-bikes-bicycles.jpg" />
+                    <h2>Etape 4/5</h2>
+                    <p>
+                        Etiam auctor, metus nec condimentum bibendum, elit sem ullamcorper tellus, maximus tempor massa libero faucibus dolor. Pellentesque eget consequat sem. Cras vitae gravida arcu, ut aliquet risus. In hac habitasse platea dictumst. Sed semper, ligula quis tincidunt vestibulum, mi eros rutrum tortor, id gravida libero sapien sit amet odio.
+                    </p>
+                </li>
+                <li class="slide">
+                    <img alt="Vélos" class="slide-img" src="public/images/summer-sport-bikes-bicycles.jpg" />
+                    <h2>Etape 5/5</h2>
+                    <p>
+                        In ullamcorper ante sit amet odio tincidunt, id sollicitudin elit fermentum. Quisque arcu ligula, imperdiet pharetra sagittis at, lobortis tempus ex. Vivamus sodales ornare arcu, at imperdiet est iaculis at. Sed laoreet nunc erat, vitae elementum eros vehicula at. Aliquam porttitor semper ante at fermentum.
+                    </p>
+                </li>
+            </ul>
+            <div class="slider-buttons">
+                <button class="slider-controls" id="slider-previous-button">&lt;</button>
+                <button class="slider-controls" id="slider-pause-button">&#10074;&#10074;</button>
+                <button class="slider-controls" id="slider-next-button">&gt;</button>
+            </div>
+        </div>
         <div id="map-container">
             <div id="map"></div>
             <div id="station">
@@ -27,6 +71,7 @@
         <div id="booking-info"></div>
 
         <script src="public/js/jquery/jquery-3.3.1.min.js"></script>
+        <script src="public/js/slider.js"></script>
         <script src="public/js/signature.js"></script>
         <script src="public/js/app.js"></script>
         <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBmO2Nsu8WL2QXpj0l5mxxJHrDw5Q6vNg&callback=initMap"></script>

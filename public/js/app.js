@@ -1,5 +1,3 @@
-var signature;
-
 function initMap() {
     // Get map
     var lyonPosition = {lat: 45.75, lng: 4.85};
@@ -38,7 +36,6 @@ function initMap() {
                     $('#station-info').html(htmlString);
 
                     // Is a bike available?
-                    console.log(station.available_bikes);
                     if (station.available_bikes > 0) {
                         $('#book-button').show();
                         $('#book-button').click(function() {
@@ -94,13 +91,20 @@ function updateBookingInfo() {
 
 // Execute when the DOM is fully loaded
 $(function() {
+    // Instantiate slider
+    var slider = new Slider('slider', 3000);
+    // Control slider with keyboard 
+    window.addEventListener('keydown', function(event) {
+        return slider.controlSliderWithKeyboard(event);
+    }, false);
+
+    // Instantiate signature
+    var signature = new Signature('signature-canvas', 200, 100);
+    // Clear signature
+    document.getElementById('signature-clear-button').addEventListener('click', function(event) {
+        signature.clear();
+    }, false);
+
     // Update booking info each second
     setInterval(updateBookingInfo, 1000);
-
-    // Signature
-    signature = Object.create(Signature);
-    signature.init('signature-canvas', 200, 100);
-    $('#signature-clear-button').click(function() {
-        signature.clear()
-    });
 });

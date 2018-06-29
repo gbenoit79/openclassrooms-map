@@ -73,7 +73,13 @@
         <script src="public/js/jquery/jquery-3.3.1.min.js"></script>
         <script src="public/js/slider.js"></script>
         <script src="public/js/signature.js"></script>
-        <script src="public/js/app.js"></script>
-        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBmO2Nsu8WL2QXpj0l5mxxJHrDw5Q6vNg&callback=initMap"></script>
+        <script src="public/js/bike-sharing-app.js"></script>
+        <script async defer src="https://maps.googleapis.com/maps/api/js?key=AIzaSyBBmO2Nsu8WL2QXpj0l5mxxJHrDw5Q6vNg&callback=bikeSharingApp.initMap"></script>
+        <script>
+// Execute when the DOM is fully loaded
+document.addEventListener('DOMContentLoaded', function() { 
+    bikeSharingApp.run();
+}, false);
+        </script>
     </body>
 </html>

@@ -5,7 +5,9 @@
 var bikeSharingApp = {
     apiUrl: 'https://api.jcdecaux.com/vls/v1/',
     apiKey: '4046fd4b9fc4bb3fa4ef3f3c67efb9e2bbb41c25',
+    bookingManager: null,
     map: null,
+    stationManager: null,
 
     // Display markers
     displayMarkers: function(msg) {
@@ -41,7 +43,7 @@ var bikeSharingApp = {
                                 },
                                 bookedAt: Date.now()
                             }
-                            sessionStorage.setItem('booking', JSON.stringify(booking));
+                            bikeSharingApp.getBookingManager().saveBooking(booking);
                             $('#station').hide();
                         });
                     });
@@ -50,6 +52,24 @@ var bikeSharingApp = {
                 $('#station').show();
             });
         }.bind(this));
+    },
+
+    // Get booking manager
+    getBookingManager: function() {
+        if (this.bookingManager == null) {
+            this.bookingManager = new BookingManager();
+        }
+
+        return this.bookingManager;
+    },
+
+    // Get station manager
+    getStationManager: function() {
+        if (this.stationManager == null) {
+            this.stationManager = new StationManager(this.apiUrl, this.apiKey);
+        }
+        
+        return this.stationManager;
     },
 
     // Init map
@@ -62,8 +82,7 @@ var bikeSharingApp = {
         });
 
         // Get stations
-        var stationManager = new StationManager(this.apiUrl, this.apiKey);
-        stationManager.getStations('Lyon', this.displayMarkers.bind(this));
+        this.getStationManager().getStations('Lyon', this.displayMarkers.bind(this));
     },
 
     // Run
@@ -83,24 +102,20 @@ var bikeSharingApp = {
         }, false);
 
         // Update booking info each second
-        setInterval(bikeSharingApp.updateBookingInfo, 1000);
+        setInterval(this.updateBookingInfo.bind(this), 1000);
     },
 
     // Update booking info
     updateBookingInfo: function() {
-        var bookingJson = sessionStorage.getItem('booking');
-        if (bookingJson == null) {
-            return false;
-        }
-    
-        var booking = JSON.parse(bookingJson);
+        // Get booking
+        var booking = this.getBookingManager().getBooking();
     
         // Get remaining time
         // 20 min session
         var remainingSeconds = (20 * 60) - ((Date.now() - booking.bookedAt) / 1000);
         // Remaining time is over?
         if (remainingSeconds <= 0) {
-            sessionStorage.removeItem('booking');
+            this.getBookingManager().deleteBooking();
             $('#booking-info').html('');
             return false;
         }

@@ -1,14 +1,14 @@
 /**
- * Station manager object
+ * Station manager
  */
 
-// StationManager constructor
+// Constructor
 function StationManager(apiUrl, apiKey) {
     this.apiUrl = apiUrl;
     this.apiKey = apiKey;
 }
 
-// getStations method of StationManager object
+// Get stations
 StationManager.prototype.getStations = function(contract, doneCallback) {
     $.ajax({
         url: this.apiUrl+'stations',

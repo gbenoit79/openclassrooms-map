@@ -1,8 +1,8 @@
 /**
- * Signature object
+ * Signature
  */
 
-// Signature constructor
+// Constructor
 function Signature(id, width, height) {
     var canvas = document.getElementById(id);
     canvas.width = parseInt(width);
@@ -37,7 +37,7 @@ function Signature(id, width, height) {
     };
 }
 
-// clear method of Signature object
+// Clear
 Signature.prototype.clear = function() {
     this.context.clearRect(0, 0, this.context.canvas.width, this.context.canvas.height);
 }

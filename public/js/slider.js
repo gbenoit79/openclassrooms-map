@@ -1,8 +1,8 @@
 /**
- * Slider object
+ * Slider
  */
 
-// Slider constructor
+// Constructor
 function Slider(id, delay) {
     this.delay = delay;
     this.slides = document.querySelectorAll('#'+id+' .slide');
@@ -32,38 +32,38 @@ function Slider(id, delay) {
     }.bind(this), false);
 }
 
-// goToSlide method of Slider object
+// Go to slide
 Slider.prototype.goToSlide = function(n) {
     this.slides[this.currentSlide].className = 'slide';
     this.currentSlide = (n + this.slides.length) % this.slides.length;
     this.slides[this.currentSlide].className = 'slide slide-showing';
 }
 
-// nextSlide method of Slider object
+// Next slide
 Slider.prototype.nextSlide = function() {
     this.goToSlide(this.currentSlide + 1);
 }
 
-// previousSlide method of Slider object
+// Previous slide
 Slider.prototype.previousSlide = function() {
     this.goToSlide(this.currentSlide - 1);
 }
 
-// pauseSlideshow method of Slider object
+// Pause slideshow
 Slider.prototype.pauseSlideshow = function() {
     this.pauseButton.innerHTML = '&#9658;';
     this.playing = false;
     clearInterval(this.slideInterval);
 }
 
-// playSlideshow method of Slider object
+// Play slideshow
 Slider.prototype.playSlideshow = function() {
     this.pauseButton.innerHTML = '&#10074;&#10074;';
     this.playing = true;
     this.slideInterval = setInterval(this.nextSlide.bind(this), this.delay);
 }
 
-// controlSliderWithKeyboard method of Slider object
+// Control slider with keyboard
 Slider.prototype.controlSliderWithKeyboard = function(event) {
     // Left arrow key
     if (event.keyCode == '37') {

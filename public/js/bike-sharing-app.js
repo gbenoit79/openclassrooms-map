@@ -12,10 +12,30 @@ var bikeSharingApp = {
     // Display markers
     displayMarkers: function(msg) {
         $.each(msg, function(key, station) {
+            // Icon
+            var iconFillOpacity = .75;
+            if (station.available_bikes == 0) {
+                var iconFillOpacity = .1;
+            } else if (station.available_bikes / station.bike_stands < .25) {
+                var iconFillOpacity = .25;
+            } else if (station.available_bikes / station.bike_stands < .5) {
+                var iconFillOpacity = .5;
+            }
+            var icon = {
+                path: 'M0-48c-9.8 0-17.7 7.8-17.7 17.4 0 15.5 17.7 30.6 17.7 30.6s17.7-15.4 17.7-30.6c0-9.6-7.9-17.4-17.7-17.4z',
+                fillColor: 'red',
+                fillOpacity: iconFillOpacity,
+                scale: 1,
+                strokeColor: 'black',
+                strokeWeight: 2
+            };
+
+            // Marker
             var marker = new google.maps.Marker({
                 position: station.position,
                 title: station.address,
-                map: this.map
+                map: this.map,
+                icon: icon
             });
             marker.addListener('click', function() {
                 $('#station').hide();

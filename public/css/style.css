@@ -41,6 +41,19 @@ body {
     border: 1px solid #000000;
 }
 
+.btn {
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+    padding: .375rem .75rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    border-radius: .25rem;
+}
+.btn:not(:disabled) {
+    cursor: pointer;
+}
+
 /* Slider */
 #slides {
     position: relative;

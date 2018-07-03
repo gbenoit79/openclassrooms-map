@@ -22,13 +22,35 @@ var bikeSharingApp = {
                 $('#book-button').hide();
                 $('#signature').hide();
 
+                // Check if it is already booked
+                var booking = bikeSharingApp.getBookingManager().getBooking();
+                if (!booking) {
+                    var isAlreadyBooked = false;
+                } else {
+                    var isAlreadyBooked = (booking.station.number == station.number);
+                }
+
+                // Calculate available bikes
+                var available_bikes = station.available_bikes;
+                if (isAlreadyBooked) {
+                    // Decrement available bikes
+                    available_bikes = (station.available_bikes > 0) ? station.available_bikes - 1 : 0;
+                }
+
+                // Display station infos
                 var htmlString = 'Adresse: '+station.address+'<br /><br />';
                 htmlString += station.bike_stands+' places<br />';
-                htmlString += station.available_bikes+' vélos disponibles<br />';
+                htmlString += available_bikes+' vélos disponibles<br />';
                 $('#station-info').html(htmlString);
 
-                // Is a bike available?
-                if (station.available_bikes > 0) {
+                // Handle booking action
+                if (isAlreadyBooked) {
+                    $('#book-button').html('Déjà réservé');
+                    $('#book-button').prop('disabled', true);
+                    $('#book-button').show();
+                } else if (available_bikes > 0) {
+                    $('#book-button').html('Réserver');
+                    $('#book-button').prop('disabled', false);
                     $('#book-button').show();
                     $('#book-button').click(function() {
                         $('#book-button').hide();
@@ -109,6 +131,9 @@ var bikeSharingApp = {
     updateBookingInfo: function() {
         // Get booking
         var booking = this.getBookingManager().getBooking();
+        if (!booking) {
+            return false;
+        }
     
         // Get remaining time
         // 20 min session
